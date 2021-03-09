@@ -9,20 +9,20 @@ import java.util.stream.Collectors;
 
 public class LinearRegression {
 
-    public static double [] linReg (List<Double> dates, List<Double> prices) {
-        List<Double> squaredX = dates.stream(). //compute the squares of the dates
+    public static double [] linReg (List<Integer> dates, List<Double> prices) {
+        List<Integer> squaredX = dates.stream(). //compute the squares of the dates
                 map(x -> x * x).
                 collect(Collectors.toList());
         List<Double> xy = new LinkedList(); //and the product of each date and time
         for (int i = 0; i < dates.size(); i++) {
             xy.add(i, dates.get(i) * prices.get(i));
         }
-        double sumX = dates.stream() //sum the dates, prices, squared dates, and date * time products respectively
-                .reduce(0.0, (a, b) -> a + b);
+        int sumX = dates.stream()  //sum the dates, prices, squared dates, and date * time products respectively
+                .reduce(0, (a, b) -> a + b);
         double sumY = prices.stream()
                 .reduce(0.0, (a, b) -> a + b);
-        double sumX2 = squaredX.stream()
-                .reduce(0.0, (a, b) -> a + b);
+        int sumX2 = squaredX.stream()
+                .reduce(0, (a, b) -> a + b);
         double sumXY = xy.stream()
                 .reduce(0.0, (a, b) -> a + b);
         double n = dates.size(); //the number of x entries
